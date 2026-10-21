@@ -1197,34 +1197,6 @@ html.dark .nav-link-pill {
   border-color: var(--border-strong);
 }
 
-.flagship-ribbon {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  background: var(--hambazi-light);
-  color: #d97706;
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  width: fit-content;
-}
-
-html.dark .flagship-ribbon {
-  color: #fbbf24;
-}
-
-@media (min-width: 768px) {
-  .flagship-ribbon {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    margin-bottom: 0;
-  }
-}
-
 .product-grid {
   display: grid;
   grid-template-columns: 100%;
