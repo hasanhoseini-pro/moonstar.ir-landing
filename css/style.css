@@ -300,8 +300,42 @@ html.dark .section-badge-amber {
   transition: transform var(--transition-fast);
 }
 
+
 .brand-link:hover .brand-logo-icon {
   transform: scale(1.05);
+}
+
+.brand-logo-img {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px var(--hambazi-glow);
+  transition: transform var(--transition-fast);
+}
+
+.brand-link:hover .brand-logo-img {
+  transform: scale(1.05);
+}
+
+.app-icon-badge {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.product-hero-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px var(--hambazi-glow);
+  display: inline-block;
 }
 
 .brand-title {
