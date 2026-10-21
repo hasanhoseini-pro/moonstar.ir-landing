@@ -382,9 +382,11 @@ html.dark .section-badge-amber {
   border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
-  box-shadow: 0 4px 14px var(--hambazi-glow);
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: transform var(--transition-fast);
 }
+
 
 @media (min-width: 768px) {
   .brand-logo-icon, .brand-logo-img {
@@ -1989,3 +1991,146 @@ html.dark .bullet-icon-emerald {
   color: var(--primary);
   transform: translateY(-2px);
 }
+
+/* ==========================================================================
+   Studio Brand Banner & Visual Identity Showcase
+   ========================================================================== */
+.studio-brand-banner {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .studio-brand-banner {
+    padding: 2.25rem 2rem;
+  }
+}
+
+.studio-brand-banner::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.studio-brand-banner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .studio-brand-banner-inner {
+    flex-direction: row;
+    text-align: right;
+    gap: 2.25rem;
+    align-items: center;
+  }
+}
+
+.studio-brand-logo-wrap {
+  flex-shrink: 0;
+  width: 130px;
+  height: 130px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
+  border: 2px solid rgba(56, 189, 248, 0.3);
+  background: #0f172a;
+}
+
+@media (min-width: 768px) {
+  .studio-brand-logo-wrap {
+    width: 170px;
+    height: 170px;
+  }
+}
+
+.studio-brand-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.studio-brand-banner-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.studio-brand-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 768px) {
+  .studio-brand-title {
+    font-size: 1.65rem;
+  }
+}
+
+.studio-brand-en {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+}
+
+.studio-brand-desc {
+  font-size: 0.925rem;
+  color: #cbd5e1;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.studio-brand-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .studio-brand-tags {
+    justify-content: flex-start;
+  }
+}
+
+.studio-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.775rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+.studio-tag i {
+  color: #38bdf8;
+}
+
