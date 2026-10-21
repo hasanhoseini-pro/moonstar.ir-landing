@@ -1,520 +1,711 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="scroll-smooth">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دست به دست | سامانه هوشمند مدیریت وام خانگی و صندوق قرعه‌کشی</title>
-    <!-- Vazirmatn Font -->
+    <title>اپلیکیشن دست به دست | سامانه هوشمند مدیریت وام خانگی و صندوق قرعه‌کشی</title>
+    <meta name="description" content="دست به دست: گردونه آنلاین قرعه‌کشی، محاسبه خودکار اقساط وام فامیلی، ثبت شفاف برندگان، حالت محرمانه و مدیریت چند صندوق همزمان.">
+    <meta name="keywords" content="دست به دست, وام خانگی, قرعه کشی وام فامیلی, مدیریت صندوق قرض الحسنه, گردونه شانس, استودیو ماه و ستاره">
+    <meta name="author" content="MoonStar Studio">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="اپلیکیشن دست به دست | مدیریت هوشمند وام خانگی و قرعه‌کشی">
+    <meta property="og:description" content="گردونه آنلاین شانس، محاسبه خودکار اقساط و شفافیت کامل برای صندوق‌های خانگی و فامیلی.">
+    <meta property="og:type" content="product">
+
+    <!-- Instant Theme Init Script (Zero FOUC) -->
+    <script>
+        (function() {
+            try {
+                const stored = localStorage.getItem('moonstar_theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Google Font: Vazirmatn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+
+    <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Vazirmatn', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#4f46e5',
-                            600: '#3f38dd',
-                            700: '#3730a3',
-                            800: '#2e2a85',
-                            900: '#1e1b4b',
-                        },
-                        gold: '#f59e0b',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #f8fafc;
-        }
-        .phone-frame {
-            border: 10px solid #1e293b;
-            border-radius: 36px;
-            box-shadow: 0 25px 50px -12px rgba(63, 56, 221, 0.25);
-            overflow: hidden;
-            background: #fff;
-            position: relative;
-        }
-        .phone-notch {
-            width: 120px;
-            height: 18px;
-            background: #1e293b;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            z-index: 20;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #3f38dd 0%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #3f38dd 0%, #6366f1 100%);
-        }
-    </style>
+
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+<body>
 
-    <!-- Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-2xl gradient-bg flex items-center justify-center text-white text-xl font-black shadow-md shadow-brand-500/20">
-                        <i class="fa-solid fa-arrows-rotate"></i>
-                    </div>
-                    <div>
-                        <span class="font-black text-2xl text-slate-900 tracking-tight block leading-none">دست به دست</span>
-                        <span class="text-[11px] font-medium text-slate-500 block mt-1">مدیریت هوشمند وام خانگی</span>
-                    </div>
-                </a>
-            </div>
+    <!-- Header / Navbar -->
+    <header class="header">
+        <div class="container header-inner">
+            <!-- Brand Logo -->
+            <a href="dastbedast.html" class="brand-link" aria-label="اپلیکیشن دست به دست">
+                <div class="brand-logo-icon" style="background: var(--dast-gradient); box-shadow: 0 4px 14px var(--dast-glow);">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </div>
+                <div>
+                    <span class="brand-title">دست به دست</span>
+                    <span class="brand-subtitle">مدیریت هوشمند وام‌های خانگی و دورهمی</span>
+                </div>
+            </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-                <a href="#features" class="hover:text-brand-600 transition">ویژگی‌ها</a>
-                <a href="#how-it-works" class="hover:text-brand-600 transition">چگونه کار می‌کند؟</a>
-                <a href="#roles" class="hover:text-brand-600 transition">نقش‌ها</a>
-                <a href="#gallery" class="hover:text-brand-600 transition">پیش‌نمایش برنامه‌</a>
-                <a href="#faq" class="hover:text-brand-600 transition">سوالات متداول</a>
-                <a href="index.html" class="text-indigo-600 hover:text-indigo-700 transition flex items-center gap-1">
-                    <i class="fa-solid fa-moon text-xs"></i>
-                    <span>استودیو ماه و ستاره</span>
-                </a>
+            <!-- Desktop Nav Menu -->
+            <nav>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#features" class="nav-link">ویژگی‌ها</a>
+                    </li>
+                    <li>
+                        <a href="#how-it-works" class="nav-link">نحوه کارکرد</a>
+                    </li>
+                    <li>
+                        <a href="#roles" class="nav-link">نقش‌ها و دسترسی</a>
+                    </li>
+                    <li>
+                        <a href="#gallery" class="nav-link">پیش‌نمایش برنامه</a>
+                    </li>
+                    <li>
+                        <a href="#faq" class="nav-link">سوالات متداول</a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="nav-link" style="color: var(--primary);">
+                            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+                            <span>استودیو ماه و ستاره</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <a href="dastbedast.apk" download class="gradient-bg text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-brand-600/25 hover:opacity-95 transition flex items-center gap-2">
-                    <i class="fa-solid fa-download text-xs"></i>
-                    <span>دانلود مستقیم</span>
+            <!-- Actions -->
+            <div class="header-actions">
+                <button type="button" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم تاریک / روشن">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="tel:09158657190" class="btn btn-primary num-fa" style="display: none; padding: 0.6rem 1.1rem; font-size: 0.875rem;" id="headerPhoneBtn">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>۰۹۱۵۸۶۵۷۱۹۰</span>
                 </a>
+
+                <button type="button" class="mobile-menu-btn" aria-label="باز کردن منوی موبایل">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 overflow-hidden relative">
-        <div class="absolute top-1/4 right-10 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl -z-10"></div>
-        <div class="absolute bottom-10 left-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -z-10"></div>
+    <!-- Mobile Drawer Backdrop -->
+    <div class="mobile-drawer-backdrop" aria-hidden="true"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold">
-                        <span class="w-2 h-2 rounded-full bg-brand-600 animate-ping"></span>
-                        <span>نسخه جدید منتشر شد • قرعه‌کشی عادلانه و شفاف</span>
-                    </div>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.2]">
-                        مدیریت آسان صندوق‌های <br>
-                        <span class="gradient-text">وام خانگی و فامیلی</span>
-                    </h1>
-
-                    <p class="text-slate-600 text-base sm:text-lg font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        با **«دست به دست»** دفترچه‌های قدیمی و محاسبات پیچیده وام‌های خانگی را کنار بگذارید. گردونه آنلاین قرعه‌کشی، ثبت شفاف برندگان، پیگیری خودکار اقساط و اطلاع‌رسانی منظم، همه در یک اپلیکیشن زیبا.
-                    </p>
-
-                    <!-- Buttons Group -->
-                    <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                        <!-- Direct APK Download -->
-                        <a href="dastbedast.apk" download class="gradient-bg text-white px-7 py-3.5 rounded-2xl font-bold shadow-xl shadow-brand-600/30 hover:shadow-2xl hover:scale-105 transition transform flex items-center gap-3">
-                            <i class="fa-brands fa-android text-2xl"></i>
-                            <div class="text-right">
-                                <span class="block text-[10px] opacity-80 font-normal">دانلود مستقیم اپلیکیشن</span>
-                                <span class="block text-sm">نسخه اندروید (APK)</span>
-                            </div>
-                        </a>
-
-                        <!-- Cafe Bazaar Button -->
-                        <div class="relative bg-white border border-slate-200 text-slate-400 px-6 py-3.5 rounded-2xl font-bold cursor-not-allowed flex items-center gap-3 shadow-sm">
-                            <span class="absolute -top-2.5 -right-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">به زودی</span>
-                            <i class="fa-solid fa-store text-xl text-slate-400"></i>
-                            <div class="text-right">
-                                <span class="block text-[10px] text-slate-400 font-normal">دریافت از</span>
-                                <span class="block text-sm text-slate-600">کافه بازار</span>
-                            </div>
-                        </div>
-
-                        <!-- Myket Button -->
-                        <div class="relative bg-white border border-slate-200 text-slate-400 px-6 py-3.5 rounded-2xl font-bold cursor-not-allowed flex items-center gap-3 shadow-sm">
-                            <span class="absolute -top-2.5 -right-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">به زودی</span>
-                            <i class="fa-solid fa-cube text-xl text-slate-400"></i>
-                            <div class="text-right">
-                                <span class="block text-[10px] text-slate-400 font-normal">دریافت از</span>
-                                <span class="block text-sm text-slate-600">مایکت</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stats Row -->
-                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0">
-                        <div>
-                            <span class="block text-2xl font-black text-slate-900">۱۰۰٪</span>
-                            <span class="text-xs text-slate-500 font-medium">شفافیت در قرعه‌کشی</span>
-                        </div>
-                        <div>
-                            <span class="block text-2xl font-black text-slate-900">بدون خطا</span>
-                            <span class="text-xs text-slate-500 font-medium">محاسبه خودکار اقساط</span>
-                        </div>
-                        <div>
-                            <span class="block text-2xl font-black text-slate-900">سهولت</span>
-                            <span class="text-xs text-slate-500 font-medium">رابط کاربری مدرن</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Mockups -->
-                <div class="lg:col-span-5 flex justify-center relative">
-                    <div class="relative w-[280px] sm:w-[310px]">
-                        <div class="phone-frame">
-                            <div class="phone-notch"></div>
-                            <img src="dast-1.jpg" alt="گردونه قرعه کشی دست به دست" class="w-full h-auto block">
-                        </div>
-
-                        <!-- Secondary floating frame -->
-                        <div class="absolute -bottom-6 -right-12 w-[210px] hidden sm:block">
-                            <div class="phone-frame shadow-2xl">
-                                <div class="phone-notch"></div>
-                                <img src="dast-2.jpg" alt="لیست برندگان دست به دست" class="w-full h-auto block">
-                            </div>
-                        </div>
-
-                        <!-- Floating Badge -->
-                        <div class="absolute top-12 -left-10 bg-white/95 backdrop-blur shadow-xl border border-slate-100 p-3.5 rounded-2xl flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
-                                <i class="fa-solid fa-trophy"></i>
-                            </div>
-                            <div>
-                                <span class="block text-xs font-bold text-slate-800">برنده این دور</span>
-                                <span class="block text-[11px] text-slate-500">علی احمدی - صندوق همکاران</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- App Highlights / Features Section -->
-    <section id="features" class="py-20 bg-white border-y border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-black text-slate-900 mb-4">چرا اپلیکیشن «دست به دست»؟</h2>
-                <p class="text-slate-600 leading-relaxed">طراحی شده بر اساس نیاز واقعی مدیران و اعضای صندوق‌های قرعه‌کشی خانگی و گروهی جهت حذف تمام سوءتفاهم‌ها و بی‌نظمی‌ها.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                
-                <!-- Feature 1 -->
-                <div class="bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl font-bold mb-6">
-                        <i class="fa-solid fa-dharmachakra"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">گردونه شانس و قرعه‌کشی آنلاین</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        قرعه‌کشی هیجان‌انگیز و کاملاً عادلانه! با انیمیشن گردونه شانسی که همه اعضا می‌توانند نتیجه آن را مشاهده کنند.
-                    </p>
-                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600">
-                        <span>مشاهده چرخه در اپلیکیشن</span>
-                        <i class="fa-solid fa-arrow-left text-[10px]"></i>
-                    </span>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold mb-6">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">حالت محرمانه و شفافیت کامل</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        امکان فعال‌سازی حالت محرمانه در تعیین برندگان برای حفظ حریم خصوصی، همراه با ثبت دقیق تاریخ و زمان قرعه‌کشی‌ها.
-                    </p>
-                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600">
-                        <span>ارسال اطلاع‌رسانی دوره‌ای</span>
-                        <i class="fa-solid fa-arrow-left text-[10px]"></i>
-                    </span>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl font-bold mb-6">
-                        <i class="fa-solid fa-user-gear"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">تفکیک نقش مدیر و عضو</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        امکان سوئیچ آسان بین نقش مدیر صندوق (با اختیارات کامل) و عضو صندوق (جهت پیگیری وام‌ها و اقساط شخصی).
-                    </p>
-                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600">
-                        <span>مدیریت چند صندوق همزمان</span>
-                        <i class="fa-solid fa-arrow-left text-[10px]"></i>
-                    </span>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Roles Showcase Section -->
-    <section id="roles" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-6 order-2 lg:order-1 flex justify-center">
-                    <div class="w-[290px]">
-                        <div class="phone-frame">
-                            <div class="phone-notch"></div>
-                            <img src="dast-4.jpg" alt="انتخاب نقش در دست به دست" class="w-full h-auto block">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
-                    <div class="inline-block px-3 py-1 rounded-lg bg-brand-100 text-brand-700 font-bold text-xs">
-                        تجربه کاربری هوشمند
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
-                        مدیر هستید یا عضو صندوق؟ <br>
-                        <span class="gradient-text">دست به دست برای هر دو آماده است</span>
-                    </h2>
-                    <p class="text-slate-600 leading-relaxed">
-                        چه خودتان مدیر و برگزارکننده وام خانگی باشید و چه به عنوان عضو در چند صندوق فامیلی و کاری حضور داشته باشید، دست به دست داشبوردی اختصاصی و متناسب با نیازتان ارائه می‌دهد.
-                    </p>
-
-                    <div class="space-y-4 pt-2">
-                        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 mt-1">
-                                <i class="fa-solid fa-user-shield"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-base">پنل مدیر صندوق</h4>
-                                <p class="text-slate-500 text-xs mt-1 leading-relaxed">تعریف صندوق جدید، تنظیم سیکل‌های ماهانه/هفتگی، تعریف مبلغ قسط، اجرای قرعه‌کشی و مدیریت اعضا.</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-indigo-100 text-brand-600 flex items-center justify-center shrink-0 mt-1">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-base">پنل عضو صندوق</h4>
-                                <p class="text-slate-500 text-xs mt-1 leading-relaxed">مشاهده وضعیت صندوق‌ها، تاریخ قرعه‌کشی بعدی، لیست برندگان قبلی و یادآوری موعد پرداخت اقساط.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- App Screenshots / Interactive Gallery -->
-    <section id="gallery" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-black text-slate-900 mb-4">نگاهی به درون اپلیکیشن دست به دست</h2>
-                <p class="text-slate-600">طراحی مینیمال، خوانا و منظم برای راحتی استفاده تمامی گروه‌های سنی.</p>
-            </div>
-
-            <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Screen 1 -->
-                <div class="flex flex-col items-center">
-                    <div class="phone-frame w-full max-w-[260px] mb-4">
-                        <div class="phone-notch"></div>
-                        <img src="dast-1.jpg" alt="گردونه قرعه کشی" class="w-full h-auto block">
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">گردونه شانس</h4>
-                    <p class="text-xs text-slate-500 mt-1 text-center">قرعه‌کشی عادلانه و دیداری</p>
-                </div>
-
-                <!-- Screen 2 -->
-                <div class="flex flex-col items-center">
-                    <div class="phone-frame w-full max-w-[260px] mb-4">
-                        <div class="phone-notch"></div>
-                        <img src="dast-2.jpg" alt="لیست برندگان" class="w-full h-auto block">
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">لیست برندگان</h4>
-                    <p class="text-xs text-slate-500 mt-1 text-center">ثبت و نمایش تاریخ و برنده هر دور</p>
-                </div>
-
-                <!-- Screen 3 -->
-                <div class="flex flex-col items-center">
-                    <div class="phone-frame w-full max-w-[260px] mb-4">
-                        <div class="phone-notch"></div>
-                        <img src="dast-3.jpg" alt="افزودن صندوق جدید" class="w-full h-auto block">
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">تعریف صندوق جدید</h4>
-                    <p class="text-xs text-slate-500 mt-1 text-center">تنظیم مبلغ اقساط و دوره تناوب</p>
-                </div>
-
-                <!-- Screen 4 -->
-                <div class="flex flex-col items-center">
-                    <div class="phone-frame w-full max-w-[260px] mb-4">
-                        <div class="phone-notch"></div>
-                        <img src="dast-5.jpg" alt="پروفایل و حالت شب" class="w-full h-auto block">
-                    </div>
-                    <h4 class="font-bold text-slate-900 text-sm">پروفایل و حالت روز/شب</h4>
-                    <p class="text-xs text-slate-500 mt-1 text-center">پشتیبانی کامل از تم تیره و روشن</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- How it works -->
-    <section id="how-it-works" class="py-20 bg-slate-900 text-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-brand-500 font-bold text-xs uppercase tracking-wider block mb-2">فرآیند ساده</span>
-                <h2 class="text-3xl font-black mb-4">چگونه وام خانگی خود را شروع کنیم؟</h2>
-                <p class="text-slate-400">تنها در ۴ گام ساده، تمام صندوق‌های خود را ساماندهی کنید.</p>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="bg-slate-800/60 border border-slate-700/60 p-6 rounded-2xl relative">
-                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-lg mb-4">۱</div>
-                    <h3 class="font-bold text-lg mb-2">نصب و انتخاب نقش</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">برنامه را نصب کرده و نقش خود را به عنوان مدیر یا عضو صندوق مشخص کنید.</p>
-                </div>
-
-                <div class="bg-slate-800/60 border border-slate-700/60 p-6 rounded-2xl relative">
-                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-lg mb-4">۲</div>
-                    <h3 class="font-bold text-lg mb-2">ایجاد یا ورود به صندوق</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">نام صندوق، مبلغ هر قسط و سیکل قرعه‌کشی (ماهانه یا...) را تنظیم کنید.</p>
-                </div>
-
-                <div class="bg-slate-800/60 border border-slate-700/60 p-6 rounded-2xl relative">
-                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-lg mb-4">۳</div>
-                    <h3 class="font-bold text-lg mb-2">چرخش گردونه قرعه‌کشی</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">در موعد مقرر، قرعه‌کشی را آنلاین برگزار کرده و برنده دور را تعیین کنید.</p>
-                </div>
-
-                <div class="bg-slate-800/60 border border-slate-700/60 p-6 rounded-2xl relative">
-                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-lg mb-4">۴</div>
-                    <h3 class="font-bold text-lg mb-2">اطلاع‌رسانی و ثبت اقساط</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">اطلاعات برنده ثبت شده و پیامک یادآوری اقساط برای اعضا ارسال می‌شود.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download CTA Section -->
-    <section id="download" class="py-20 gradient-bg text-white relative">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-            <h2 class="text-3xl sm:text-5xl font-black leading-tight">
-                همین حالا «دست به دست» را دریافت کنید
-            </h2>
-            <p class="text-brand-100 max-w-2xl mx-auto text-base sm:text-lg">
-                صندوق‌های قرعه‌کشی خانگی، فامیلی و همکاران خود را منظم، شفاف و بی‌دردسر مدیریت کنید.
-            </p>
-
-            <div class="pt-4 flex flex-wrap justify-center items-center gap-4">
-                <!-- Direct APK Download -->
-                <a href="dastbedast.apk" download class="bg-white text-brand-700 hover:bg-slate-100 px-8 py-4 rounded-2xl font-bold shadow-2xl transition flex items-center gap-3">
-                    <i class="fa-brands fa-android text-2xl"></i>
-                    <div class="text-right">
-                        <span class="block text-[10px] text-slate-500 font-normal">دانلود فایل مستقیم</span>
-                        <span class="block text-sm font-extrabold">نسخه اندروید (APK)</span>
-                    </div>
-                </a>
-
-                <!-- Cafe Bazaar Button -->
-                <div class="relative bg-brand-800/70 border border-brand-400/30 text-white/70 px-7 py-4 rounded-2xl font-bold cursor-not-allowed flex items-center gap-3 backdrop-blur-sm">
-                    <span class="absolute -top-2.5 -right-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">به زودی</span>
-                    <i class="fa-solid fa-store text-xl text-white/70"></i>
-                    <div class="text-right">
-                        <span class="block text-[10px] text-brand-200/70 font-normal">دریافت از</span>
-                        <span class="block text-sm font-extrabold text-white">کافه بازار</span>
-                    </div>
-                </div>
-
-                <!-- Myket Button -->
-                <div class="relative bg-brand-800/70 border border-brand-400/30 text-white/70 px-7 py-4 rounded-2xl font-bold cursor-not-allowed flex items-center gap-3 backdrop-blur-sm">
-                    <span class="absolute -top-2.5 -right-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">به زودی</span>
-                    <i class="fa-solid fa-cube text-xl text-white/70"></i>
-                    <div class="text-right">
-                        <span class="block text-[10px] text-brand-200/70 font-normal">دریافت از</span>
-                        <span class="block text-sm font-extrabold text-white">مایکت</span>
-                    </div>
-                </div>
-            </div>
-
-            <p class="text-xs text-brand-200">
-                پشتیبانی کامل از تمامی دستگاه‌های اندرویدی
-            </p>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-black text-slate-900 mb-3">سوالات متداول</h2>
-                <p class="text-slate-600">پاسخ به سوالاتی که ممکن است داشته باشید</p>
-            </div>
-
-            <div class="space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200">
-                    <h3 class="font-bold text-slate-900 mb-2">آیا قرعه‌کشی در اپلیکیشن واقعاً عادلانه است؟</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">بله، الگوریتم گردونه شانس به‌صورت کاملاً تصادفی و بر پایه استانداردهای نرم‌افزاری طراحی شده است تا نتایجی ۱۰۰٪ عادلانه و بدون دخالت انسانی ایجاد کند.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl border border-slate-200">
-                    <h3 class="font-bold text-slate-900 mb-2">چگونه می‌توانم به عنوان مدیر صندوق جدید بسازم؟</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">کافیست پس از ورود به اپلیکیشن، در بخش نقش‌ها گزینه‌ «مدیر صندوق» را انتخاب کرده و با زدن دکمه «افزودن صندوق جدید»، مشخصات وام از جمله مبلغ قسط و سیکل زمانی را وارد کنید.</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl border border-slate-200">
-                    <h3 class="font-bold text-slate-900 mb-2">چگونه فایل برنامه را دریافت و نصب کنم؟</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">می‌توانید فایل نصبی مستقیم (APK) را دانلود کرده و روی گوشی اندرویدی خود نصب نمایید. نسخه بازار و مایکت نیز به‌زودی در دسترس قرار خواهند گرفت.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center text-white text-base font-bold">
+    <!-- Mobile Drawer Navigation -->
+    <aside class="mobile-drawer" aria-label="منوی موبایل">
+        <div class="mobile-drawer-head">
+            <div class="brand-link">
+                <div class="brand-logo-icon" style="width: 2.25rem; height: 2.25rem; font-size: 1rem; background: var(--dast-gradient);">
                     <i class="fa-solid fa-arrows-rotate"></i>
                 </div>
                 <div>
-                    <span class="font-black text-xl text-white block leading-none">دست به دست</span>
-                    <span class="text-[10px] text-slate-400 mt-1 block">محصولی از استودیو برنامه‌نویسی ماه و ستاره</span>
+                    <span class="brand-title" style="font-size: 1rem;">دست به دست</span>
+                    <span class="brand-subtitle" style="font-size: 0.6875rem;">مدیریت وام خانگی</span>
+                </div>
+            </div>
+            <button type="button" class="mobile-drawer-close" aria-label="بستن منو">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item">
+                <a href="#features">
+                    <span>ویژگی‌ها و امکانات</span>
+                    <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#how-it-works">
+                    <span>نحوه کارکرد سامانه</span>
+                    <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#roles">
+                    <span>نقش مدیر و اعضا</span>
+                    <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#gallery">
+                    <span>تصاویر محیط برنامه</span>
+                    <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#faq">
+                    <span>سوالات متداول</span>
+                    <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="index.html">
+                    <span>بازگشت به سایت ماه و ستاره</span>
+                    <i class="fa-solid fa-moon" style="font-size: 0.85rem; color: var(--primary);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="hambazi.html">
+                    <span>اپلیکیشن همبازی (محصول اصلی)</span>
+                    <i class="fa-solid fa-shapes" style="font-size: 0.85rem; color: #f59e0b;"></i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="mobile-drawer-footer">
+            <a href="tel:09158657190" class="btn btn-primary num-fa" style="width: 100%;">
+                <i class="fa-solid fa-phone"></i>
+                <span>تماس مستقیم: ۰۹۱۵۸۶۵۷۱۹۰</span>
+            </a>
+            <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%;">
+                <i class="fa-brands fa-telegram" style="color: #0284c7;"></i>
+                <span>پشتیبانی در تلگرام</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-glow-1"></div>
+            <div class="hero-glow-2" style="background: radial-gradient(circle, var(--dast-glow) 0%, rgba(67, 56, 202, 0) 70%);"></div>
+
+            <div class="container hero-grid">
+                <!-- Content -->
+                <div class="hero-content">
+                    <div class="hero-spotlight-pill">
+                        <span class="hero-spotlight-dot"></span>
+                        <span>نسخه رسمی منتشر شد • قرعه‌کشی عادلانه و شفاف</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        مدیریت آسان و عادلانه <br>
+                        <span class="text-gradient-primary">صندوق‌های وام خانگی و فامیلی</span>
+                    </h1>
+
+                    <p class="hero-desc">
+                        با اپلیکیشن <strong>«دست به دست»</strong> دفترچه‌های خط‌خورده و محاسبات پیچیده وام‌های خانوادگی را فراموش کنید. گردونه آنلاین قرعه‌کشی، محاسبه خودکار اقساط، تعیین برندگان دوره‌ها و ثبت پرداخت‌ها همه در یک محیط امن و زیبا.
+                    </p>
+
+                    <!-- Official Store Downloads -->
+                    <div style="margin-bottom: 2rem;">
+                        <span style="font-size: 0.8125rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.75rem;">
+                            دانلود رایگان و نصب از کافه بازار و مایکت:
+                        </span>
+                        <div class="store-badges-group" style="justify-content: center;">
+                            <!-- Cafe Bazaar -->
+                            <a href="https://cafebazaar.ir/app/ir.techninja.dastbedast" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-bazaar">
+                                <div class="store-icon-wrap store-icon-bazaar">
+                                    <i class="fa-solid fa-store"></i>
+                                </div>
+                                <div class="store-badge-text">
+                                    <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                                    <span class="store-badge-title">کافه بازار</span>
+                                </div>
+                            </a>
+
+                            <!-- Myket -->
+                            <a href="https://myket.ir/app/ir.techninja.dastbedast" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-myket">
+                                <div class="store-icon-wrap store-icon-myket">
+                                    <i class="fa-solid fa-cube"></i>
+                                </div>
+                                <div class="store-badge-text">
+                                    <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                                    <span class="store-badge-title">مایکت</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="#how-it-works" class="btn btn-secondary">
+                            <i class="fa-solid fa-play"></i>
+                            <span>نحوه کارکرد سامانه</span>
+                        </a>
+                        <a href="tel:09158657190" class="btn btn-primary num-fa">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>مشاوره و پشتیبانی: ۰۹۱۵۸۶۵۷۱۹۰</span>
+                        </a>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="hero-stats-row">
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-val num-fa">۱۰۰٪</span>
+                            <span class="hero-stat-lbl">شفافیت در قرعه‌کشی</span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-val">بدون خطا</span>
+                            <span class="hero-stat-lbl">محاسبه خودکار اقساط و طلب</span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-val">ساده و روان</span>
+                            <span class="hero-stat-lbl">مناسب برای تمام اعضای فامیل</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Showcase (Phone Mockups) -->
+                <div class="phone-mockup-wrapper">
+                    <!-- Main Frame (Wheel of fortune) -->
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <img src="dast-1.jpg" alt="گردونه شانس اپلیکیشن دست به دست" class="phone-img" loading="eager" width="290" height="627">
+                    </div>
+
+                    <!-- Secondary Frame (Winners List) -->
+                    <div class="secondary-phone">
+                        <div class="phone-frame" style="max-width: 220px; box-shadow: 0 25px 40px rgba(0,0,0,0.45);">
+                            <div class="phone-notch"></div>
+                            <img src="dast-2.jpg" alt="لیست برندگان دست به دست" class="phone-img" loading="lazy" width="220" height="476">
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="floating-stat-badge badge-top-left">
+                        <div style="width: 2.25rem; height: 2.25rem; border-radius: 8px; background: rgba(79, 70, 229, 0.15); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); display: block;">قرعه‌کشی زنده</span>
+                            <span style="font-size: 0.6875rem; color: var(--text-muted); display: block;">بدون نیاز به کاغذ و دخالت دست</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section" style="background: var(--bg-surface-subtle); border-top: 1px solid var(--border-subtle);">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">امکانات کلیدی و منحصربه‌فرد</span>
+                    <h2 class="section-title">چرا از «دست به دست» استفاده کنیم؟</h2>
+                    <p class="section-desc">طراحی شده بر اساس تجربه واقعی مدیران صندوق‌های فامیلی جهت حذف تمام سوءتفاهم‌ها و تاخیرها.</p>
+                </div>
+
+                <div class="cards-grid-3">
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(79, 70, 229, 0.15); color: var(--primary);">
+                            <i class="fa-solid fa-dharmachakra"></i>
+                        </div>
+                        <h3 class="feature-card-title">گردونه شانس و قرعه‌کشی آنلاین</h3>
+                        <p class="feature-card-text">
+                            قرعه‌کشی پرهیجان و کاملاً تصادفی! انیمیشن گردونه شانس را فعال کنید تا نام برنده هر دوره در فضایی عادلانه و شفاف انتخاب و ثبت شود.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(16, 185, 129, 0.15); color: #059669;">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h3 class="feature-card-title">محاسبه خودکار اقساط و بدهی‌ها</h3>
+                        <p class="feature-card-text">
+                            مبلغ کل وام، اقساط ماهانه هر فرد، تسویه‌های انجام شده و باقیمانده بدهی به صورت خودکار محاسبه شده و نیاز به دفترچه و ماشین حساب را کاملاً حذف می‌کند.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(245, 158, 11, 0.15); color: #d97706;">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <h3 class="feature-card-title">حالت محرمانه و حفظ حریم خصوصی</h3>
+                        <p class="feature-card-text">
+                            امکان فعال‌سازی حالت محرمانه در نمایش اسامی برندگان برای احترام به حریم خصوصی افراد، همراه با ثبت دقیق سوابق تاریخی قرعه‌کشی‌ها.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(2, 132, 199, 0.15); color: #0284c7;">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="feature-card-title">مدیریت چند صندوق همزمان</h3>
+                        <p class="feature-card-text">
+                            اگر همزمان در صندوق فامیل پدری، همکاران شرکت و دوستان عضو هستید، همه صندوق‌ها را در یک اپلیکیشن واحد با یک نگاه مدیریت کنید.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(139, 92, 246, 0.15); color: #7c3aed;">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <h3 class="feature-card-title">یادآور خودکار تاریخ سررسید اقساط</h3>
+                        <p class="feature-card-text">
+                            دیگر مدیر صندوق نیاز به تماس و پیگیری مداوم ندارد؛ سیستم زمان واریز قسط بعدی را پیش از سررسید به اعضا یادآوری می‌کند.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(244, 63, 94, 0.15); color: #e11d48;">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <h3 class="feature-card-title">تفکیک پنل مدیر و اعضا</h3>
+                        <p class="feature-card-text">
+                            مدیر صندوق اختیارات ثبت پرداخت، قرعه‌کشی و اضافه کردن عضو را دارد و اعضا وضعیت وام و اقساط شخصی خود را مشاهده می‌کنند.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">فرآیند ۴ گامی</span>
+                    <h2 class="section-title">چگونه با «دست به دست» وام خانگی را مدیریت کنیم؟</h2>
+                    <p class="section-desc">در ۴ مرحله ساده صندوق خود را راه‌اندازی کرده و از دردسرهای همیشگی رها شوید.</p>
+                </div>
+
+                <div class="cards-grid-4">
+                    <!-- Step 1 -->
+                    <div class="feature-card" style="text-align: center; align-items: center;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--primary-gradient); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; font-weight: 900; margin-bottom: 1.25rem;">
+                            ۱
+                        </div>
+                        <h3 class="feature-card-title">نصب برنامه</h3>
+                        <p class="feature-card-text">اپلیکیشن را مستقیماً از کافه بازار یا مایکت دانلود و روی گوشی خود نصب کنید.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="feature-card" style="text-align: center; align-items: center;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--primary-gradient); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; font-weight: 900; margin-bottom: 1.25rem;">
+                            ۲
+                        </div>
+                        <h3 class="feature-card-title">تعریف صندوق</h3>
+                        <p class="feature-card-text">نام صندوق، مبلغ هر قسط، دوره زمانی (ماهانه/دو‌هفته) و اسامی اعضا را وارد نمایید.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="feature-card" style="text-align: center; align-items: center;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--primary-gradient); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; font-weight: 900; margin-bottom: 1.25rem;">
+                            ۳
+                        </div>
+                        <h3 class="feature-card-title">چرخش گردونه قرعه‌کشی</h3>
+                        <p class="feature-card-text">در موعد مقرر، قرعه‌کشی آنلاین را اجرا کنید تا برنده دور با شفافیت کامل مشخص شود.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="feature-card" style="text-align: center; align-items: center;">
+                        <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--primary-gradient); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; font-weight: 900; margin-bottom: 1.25rem;">
+                            ۴
+                        </div>
+                        <h3 class="feature-card-title">ثبت و تسویه اقساط</h3>
+                        <p class="feature-card-text">پرداخت‌ها به راحتی تیک خورده و وضعیت مانده حساب اعضا در هر لحظه روشن است.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roles Section -->
+        <section id="roles" class="section" style="background: var(--bg-surface-subtle); border-top: 1px solid var(--border-subtle);">
+            <div class="container">
+                <div class="product-grid" style="align-items: center;">
+                    <!-- Visual Frame -->
+                    <div class="phone-mockup-wrapper">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <img src="dast-4.jpg" alt="انتخاب نقش در دست به دست" class="phone-img" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="product-content">
+                        <span class="section-badge section-badge-indigo">انعطاف‌پذیری در استفاده</span>
+                        <h2 class="section-title">
+                            یک اپلیکیشن، دو نقش هوشمند: <br>
+                            <span class="text-gradient-primary">مدیر صندوق یا عضو عادی</span>
+                        </h2>
+                        <p class="product-desc">
+                            «دست به دست» با درک درست از سازوکار صندوق‌های خانگی توسعه داده شده است. شما بر اساس نیاز خود می‌توانید نقش خود را تعیین کرده یا با یک لمس میان صندوق‌هایی که در آنها عضو یا مدیر هستید جابجا شوید.
+                        </p>
+
+                        <div class="feature-bullets-grid" style="grid-template-columns: 1fr;">
+                            <div class="feature-bullet-item">
+                                <div class="feature-bullet-icon bullet-icon-indigo">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <div class="bullet-text">
+                                    <h4>نقش مدیر صندوق</h4>
+                                    <p>تعریف مشخصات وام، اضافه کردن اعضا، برگزاری قرعه‌کشی، تایید پرداخت‌ها و ارسال اطلاعیه‌ها.</p>
+                                </div>
+                            </div>
+
+                            <div class="feature-bullet-item">
+                                <div class="feature-bullet-icon bullet-icon-emerald">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </div>
+                                <div class="bullet-text">
+                                    <h4>نقش عضو صندوق</h4>
+                                    <p>مشاهده وضعیت وام‌های شخصی، تاریخ سررسید اقساط، اطلاع از برندگان دوره‌ها و ثبت فیش‌های واریزی.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshot Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">پیش‌نمایش صفحات اپلیکیشن</span>
+                    <h2 class="section-title">نگاهی به بخش‌های مختلف «دست به دست»</h2>
+                    <p class="section-desc">محیطی ساده، زیبا و منظم که کار کردن با آن برای تمام اعضای خانواده آسان است.</p>
+                </div>
+
+                <div class="cards-grid-4">
+                    <!-- Screen 1: Wheel -->
+                    <div class="screenshot-card">
+                        <div class="screenshot-phone-wrap">
+                            <div class="phone-frame">
+                                <div class="phone-notch"></div>
+                                <img src="dast-1.jpg" alt="گردونه قرعه کشی" class="phone-img" loading="lazy">
+                            </div>
+                        </div>
+                        <span class="screenshot-tag" style="background: rgba(79, 70, 229, 0.12); color: var(--primary);">قرعه‌کشی</span>
+                        <h4 class="screenshot-title">گردونه هیجان‌انگیز شانس</h4>
+                        <p class="screenshot-desc">انیمیشن جذاب انتخاب برنده بدون شائبه و ابهام</p>
+                    </div>
+
+                    <!-- Screen 2: Winners -->
+                    <div class="screenshot-card">
+                        <div class="screenshot-phone-wrap">
+                            <div class="phone-frame">
+                                <div class="phone-notch"></div>
+                                <img src="dast-2.jpg" alt="لیست برندگان قرعه کشی" class="phone-img" loading="lazy">
+                            </div>
+                        </div>
+                        <span class="screenshot-tag" style="background: rgba(245, 158, 11, 0.12); color: #d97706;">تاریخچه نوبت‌ها</span>
+                        <h4 class="screenshot-title">لیست شفاف برندگان</h4>
+                        <p class="screenshot-desc">ثبت نوبت‌های گذشته و اعضای باقیمانده در صف قرعه‌کشی</p>
+                    </div>
+
+                    <!-- Screen 3: Loans List -->
+                    <div class="screenshot-card">
+                        <div class="screenshot-phone-wrap">
+                            <div class="phone-frame">
+                                <div class="phone-notch"></div>
+                                <img src="dast-3.jpg" alt="لیست وام ها و اقساط" class="phone-img" loading="lazy">
+                            </div>
+                        </div>
+                        <span class="screenshot-tag" style="background: rgba(16, 185, 129, 0.12); color: #059669;">مدیریت حساب</span>
+                        <h4 class="screenshot-title">وضعیت اقساط و طلب‌ها</h4>
+                        <p class="screenshot-desc">مشاهده مبالغ واریز شده و مانده هر دوره با تفکیک وضعیت</p>
+                    </div>
+
+                    <!-- Screen 4: Roles & Settings -->
+                    <div class="screenshot-card">
+                        <div class="screenshot-phone-wrap">
+                            <div class="phone-frame">
+                                <div class="phone-notch"></div>
+                                <img src="dast-5.jpg" alt="تنظیمات صندوق و اعضا" class="phone-img" loading="lazy">
+                            </div>
+                        </div>
+                        <span class="screenshot-tag" style="background: rgba(2, 132, 199, 0.12); color: #0284c7;">تنظیمات صندوق</span>
+                        <h4 class="screenshot-title">پیکربندی آسان</h4>
+                        <p class="screenshot-desc">تعریف مبالغ، زمان‌بندی اقساط و دعوت اعضا با لینک امن</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section" style="background: var(--bg-surface-subtle); border-top: 1px solid var(--border-subtle);">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">پاسخ به ابهامات</span>
+                    <h2 class="section-title">سوالات متداول درباره دست به دست</h2>
+                    <p class="section-desc">پاسخ به سوالات متداول مدیران و اعضای صندوق‌های خانگی</p>
+                </div>
+
+                <div class="faq-list">
+                    <!-- Q1 -->
+                    <div class="faq-item active">
+                        <button type="button" class="faq-question">
+                            <span>آیا قرعه‌کشی گردونه شانس کاملاً عادلانه و تصادفی است؟</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            بله؛ الگوریتم گردونه شانس بر پایه استانداردهای تولید اعداد تصادفی (Random) طراحی شده و هیچ‌گونه دخالت انسانی یا ترتیبی در انتخاب نام برنده وجود ندارد. همه اعضا می‌توانند نتیجه را به صورت زنده و شفاف مشاهده نمایند.
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question">
+                            <span>چگونه می‌توانم یک صندوق جدید بسازم؟</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            پس از نصب برنامه، گزینه «مدیر صندوق» را انتخاب کنید. سپس با فشردن دکمه «ایجاد صندوق جدید»، نام صندوق، مبلغ کل وام، میزان هر قسط و دوره قرعه‌کشی را وارد کنید تا صندوق در چند ثانیه آماده استفاده شود.
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question">
+                            <span>حالت محرمانه چیست و چه کاربردی دارد؟</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            در برخی صندوق‌ها، اعضا ترجیح می‌دهند نام برنده هر دور به جهت حفظ احترام و جلوگیری از معذوریت‌های مالی پنهان بماند. در دست به دست، مدیر صندوق می‌تواند این حالت را فعال کند تا فقط خود شخص برنده و مدیر از نتیجه مطلع شوند.
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question">
+                            <span>چگونه برنامه را دانلود کنم؟</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            نسخه رسمی «دست به دست» در فروشگاه‌های کافه بازار و مایکت در دسترس است و شما می‌توانید بدون واسطه و با امنیت کامل آن را دانلود و به‌روزرسانی فرمایید.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Download CTA -->
+        <section class="section" style="background: var(--dast-gradient); color: #ffffff; text-align: center;">
+            <div class="container" style="max-width: 820px;">
+                <h2 style="font-size: 2.25rem; font-weight: 900; line-height: 1.3; margin-bottom: 1.25rem; color: #ffffff;">
+                    همین امروز صندوق‌های خود را منظم و شفاف کنید
+                </h2>
+                <p style="font-size: 1.125rem; opacity: 0.95; line-height: 1.8; margin-bottom: 2rem; color: #ffffff;">
+                    با دانلود رایگان «دست به دست» از کافه بازار و مایکت، لذت وام‌داری بدون دغدغه و سوءتفاهم را تجربه کنید.
+                </p>
+
+                <!-- Store download badges -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+                    <!-- Bazaar -->
+                    <a href="https://cafebazaar.ir/app/ir.techninja.dastbedast" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-bazaar" style="background: #ffffff; color: #0f172a;">
+                        <div class="store-icon-wrap store-icon-bazaar">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+                        <div class="store-badge-text">
+                            <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                            <span class="store-badge-title">کافه بازار</span>
+                        </div>
+                    </a>
+
+                    <!-- Myket -->
+                    <a href="https://myket.ir/app/ir.techninja.dastbedast" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-myket" style="background: #ffffff; color: #0f172a;">
+                        <div class="store-icon-wrap store-icon-myket">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        <div class="store-badge-text">
+                            <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                            <span class="store-badge-title">مایکت</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Call and Telegram Actions -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+                    <a href="tel:09158657190" class="btn btn-secondary num-fa" style="font-size: 1rem; padding: 0.85rem 1.75rem;">
+                        <i class="fa-solid fa-phone" style="color: #10b981;"></i>
+                        <span>تماس مستقیم: ۰۹۱۵۸۶۵۷۱۹۰</span>
+                    </a>
+                    <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 1rem; padding: 0.85rem 1.75rem;">
+                        <i class="fa-brands fa-telegram" style="color: #0284c7;"></i>
+                        <span>گفتگو در تلگرام</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="brand-link">
+                        <div class="brand-logo-icon" style="width: 2.25rem; height: 2.25rem; font-size: 1rem; background: var(--dast-gradient);">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </div>
+                        <div>
+                            <span class="brand-title">اپلیکیشن دست به دست</span>
+                            <span class="brand-subtitle">محصولی از استودیو نرم‌افزاری ماه و ستاره</span>
+                        </div>
+                    </div>
+                    <p>
+                        سامانه هوشمند و عادلانه قرعه‌کشی و مدیریت وام‌های خانوادگی و دورهمی، با هدف ایجاد شفافیت و آرامش در روابط دوستانه و فامیلی.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">بخش‌های صفحه</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features" class="footer-link">امکانات و ویژگی‌ها</a></li>
+                        <li><a href="#how-it-works" class="footer-link">نحوه کارکرد</a></li>
+                        <li><a href="#roles" class="footer-link">نقش‌ها و دسترسی</a></li>
+                        <li><a href="#gallery" class="footer-link">پیش‌نمایش برنامه</a></li>
+                        <li><a href="index.html" class="footer-link">سایت استودیو ماه و ستاره</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">پشتیبانی و تماس</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:09158657190" class="footer-link num-fa">تماس تلفنی: ۰۹۱۵۸۶۵۷۱۹۰</a></li>
+                        <li><a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="footer-link">تلگرام: tech_ninja@</a></li>
+                        <li><a href="mailto:hasan.hoseini.dev@gmail.com" class="footer-link">ایمیل: hasan.hoseini.dev@gmail.com</a></li>
+                    </ul>
                 </div>
             </div>
 
-            <p class="text-xs text-slate-500">
-                تمامی حقوق برای اپلیکیشن مدیریت وام خانگی «دست به دست» محفوظ است. ۱۴۰۵
-            </p>
-
-            <div class="flex items-center gap-4 text-slate-400 text-lg">
-                <a href="index.html" title="سایت استودیو" class="hover:text-white transition"><i class="fa-solid fa-globe"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+            <div class="footer-bottom">
+                <div>
+                    تمامی حقوق برای اپلیکیشن «دست به دست» و استودیو ماه و ستاره محفوظ است © ۱۴۰۵
+                </div>
+                <div class="social-links">
+                    <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="تلگرام">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                    <a href="mailto:hasan.hoseini.dev@gmail.com" class="social-btn" aria-label="ایمیل">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="tel:09158657190" class="social-btn" aria-label="تماس تلفنی">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Interactive Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        if (window.innerWidth >= 1200) {
+            const btn = document.getElementById('headerPhoneBtn');
+            if (btn) btn.style.display = 'inline-flex';
+        }
+    </script>
 </body>
 </html>

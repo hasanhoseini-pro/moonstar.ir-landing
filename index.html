@@ -1,458 +1,695 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="scroll-smooth">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استودیو نرم‌افزاری ماه و ستاره | MoonStar Studio</title>
-    <meta name="description" content="استودیو نرم‌افزاری ماه و ستاره؛ خلق اپلیکیشن‌های روان، امن و دلنشین برای مدیریت آسان‌تر زندگی و کسب‌وکار شما.">
-    
-    <!-- Vazirmatn Font -->
+    <title>استودیو نرم‌افزاری ماه و ستاره | توسعه اپلیکیشن‌های هوشمند و کاربردی</title>
+    <meta name="description" content="استودیو نرم‌افزاری ماه و ستاره، خالق اپلیکیشن مدیریت خانه بازی همبازی (محصول اصلی) و اپلیکیشن قرعه‌کشی وام خانگی دست به دست.">
+    <meta name="keywords" content="استودیو ماه و ستاره, اپلیکیشن همبازی, مدیریت خانه بازی, دست به دست, قرعه کشی وام خانگی, نرم افزار شهربازی">
+    <meta name="author" content="MoonStar Studio">
+
+    <!-- Preload & OpenGraph -->
+    <meta property="og:title" content="استودیو نرم‌افزاری ماه و ستاره | همبازی و دست به دست">
+    <meta property="og:description" content="راهکارهای نرم‌افزاری مدرن برای مدیریت خانه بازی و صندوق‌های خانگی با بالاترین سرعت و سادگی.">
+    <meta property="og:type" content="website">
+
+    <!-- Instant Theme Init Script (Zero FOUC) -->
+    <script>
+        (function() {
+            try {
+                const stored = localStorage.getItem('moonstar_theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Google Font: Vazirmatn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Vazirmatn', 'sans-serif'],
-                    },
-                    colors: {
-                        cloud: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            800: '#1e293b',
-                            900: '#0f172a'
-                        },
-                        serene: {
-                            blue: '#3b82f6',
-                            softBlue: '#eff6ff',
-                            deepBlue: '#1e3a8a',
-                            violet: '#6366f1',
-                            amber: '#f59e0b',
-                            emerald: '#10b981'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #fafbfc;
-            color: #334155;
-        }
-        .soft-gradient {
-            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
-        }
-        .soft-gradient-subtle {
-            background: radial-gradient(circle at 10% 20%, rgba(238, 242, 255, 0.8) 0%, rgba(240, 249, 255, 0.6) 90%);
-        }
-        .card-shadow {
-            box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
-        }
-        .card-shadow:hover {
-            box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
-        }
-        .text-gradient {
-            background: linear-gradient(135deg, #312e81 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .phone-frame {
-            border: 9px solid #1e293b;
-            border-radius: 36px;
-            box-shadow: 0 20px 40px -10px rgba(30, 41, 59, 0.18);
-            overflow: hidden;
-            background: #fff;
-            position: relative;
-        }
-        .phone-notch {
-            width: 100px;
-            height: 15px;
-            background: #1e293b;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            z-index: 20;
-        }
-    </style>
+
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="antialiased selection:bg-indigo-100 selection:text-indigo-900">
+<body>
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100/90">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-xl group-hover:bg-indigo-600 group-hover:text-white transition duration-300">
+    <header class="header">
+        <div class="container header-inner">
+            <!-- Brand Logo -->
+            <a href="index.html" class="brand-link" aria-label="صفحه اصلی استودیو ماه و ستاره">
+                <div class="brand-logo-icon">
                     <i class="fa-solid fa-moon"></i>
                 </div>
                 <div>
-                    <span class="font-extrabold text-xl text-slate-800 tracking-tight block">استودیو ماه و ستاره</span>
-                    <span class="text-[11px] font-medium text-slate-500 block">نرم‌افزارهایی برای آرامش و نظم زندگی</span>
+                    <span class="brand-title">استودیو ماه و ستاره</span>
+                    <span class="brand-subtitle">نرم‌افزارهای هوشمند، ساده و قابل اتکا</span>
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-                <a href="#about" class="hover:text-indigo-600 transition">داستان ما</a>
-                <a href="#products" class="hover:text-indigo-600 transition">محصولات و برنامه‌ها</a>
-                <a href="#values" class="hover:text-indigo-600 transition">اصول کار ما</a>
-                <a href="#contact" class="hover:text-indigo-600 transition">ارتباط با استودیو</a>
+            <!-- Desktop Nav Menu -->
+            <nav>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#hambazi" class="nav-link">
+                            <span>همبازی</span>
+                            <span class="nav-link-pill">محصول اصلی</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#dastbedast" class="nav-link">دست به دست</a>
+                    </li>
+                    <li>
+                        <a href="#values" class="nav-link">اصول ما</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="nav-link">تماس و مشاوره</a>
+                    </li>
+                </ul>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <a href="#products" class="soft-gradient text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md shadow-indigo-500/20 hover:opacity-95 transition flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-xs"></i>
-                    <span>مشاهده برنامه‌ها</span>
+            <!-- Actions -->
+            <div class="header-actions">
+                <!-- Theme Toggle Button -->
+                <button type="button" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم تاریک / روشن">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Phone CTA (Desktop) -->
+                <a href="tel:09158657190" class="btn btn-secondary num-fa" style="display: none; padding: 0.6rem 1.1rem; font-size: 0.875rem;" id="headerPhoneBtn">
+                    <i class="fa-solid fa-phone text-emerald-500" style="color: #10b981;"></i>
+                    <span>۰۹۱۵۸۶۵۷۱۹۰</span>
                 </a>
+
+                <!-- Mobile Menu Button -->
+                <button type="button" class="mobile-menu-btn" aria-label="باز کردن منوی موبایل">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-36 pb-20 soft-gradient-subtle relative overflow-hidden border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold">
-                        <i class="fa-solid fa-heart text-rose-500"></i>
-                        <span>توسعه نرم‌افزار با تمرکز بر سادگی، شفافیت و آرامش ذهن</span>
-                    </div>
+    <!-- Mobile Drawer Backdrop -->
+    <div class="mobile-drawer-backdrop" aria-hidden="true"></div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.25]">
-                        فناوری وقتی باارزش است که <br>
-                        <span class="text-gradient">زندگی را ساده‌تر کند</span>
+    <!-- Mobile Drawer Navigation -->
+    <aside class="mobile-drawer" aria-label="منوی موبایل">
+        <div class="mobile-drawer-head">
+            <div class="brand-link">
+                <div class="brand-logo-icon" style="width: 2.25rem; height: 2.25rem; font-size: 1rem;">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+                <div>
+                    <span class="brand-title" style="font-size: 1rem;">ماه و ستاره</span>
+                    <span class="brand-subtitle" style="font-size: 0.6875rem;">استودیو نرم‌افزاری</span>
+                </div>
+            </div>
+            <button type="button" class="mobile-drawer-close" aria-label="بستن منو">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item">
+                <a href="#hambazi">
+                    <span>اپلیکیشن همبازی</span>
+                    <span class="nav-link-pill">اولویت اول</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#dastbedast">
+                    <span>اپلیکیشن دست به دست</span>
+                    <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="hambazi.html">
+                    <span>صفحه اختصاصی همبازی</span>
+                    <i class="fa-solid fa-shapes" style="font-size: 0.85rem; color: #f59e0b;"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="dastbedast.html">
+                    <span>صفحه اختصاصی دست به دست</span>
+                    <i class="fa-solid fa-arrows-rotate" style="font-size: 0.85rem; color: var(--primary);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#values">
+                    <span>اصول و تعهدات ما</span>
+                    <i class="fa-solid fa-shield-halved" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#contact">
+                    <span>ارتباط با استودیو</span>
+                    <i class="fa-solid fa-headset" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="mobile-drawer-footer">
+            <a href="tel:09158657190" class="btn btn-primary num-fa" style="width: 100%;">
+                <i class="fa-solid fa-phone"></i>
+                <span>تماس مستقیم: ۰۹۱۵۸۶۵۷۱۹۰</span>
+            </a>
+            <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%;">
+                <i class="fa-brands fa-telegram" style="color: #0284c7;"></i>
+                <span>گفتگو در تلگرام</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-glow-1"></div>
+            <div class="hero-glow-2"></div>
+
+            <div class="container hero-grid">
+                <!-- Text Content -->
+                <div class="hero-content">
+                    <a href="#hambazi" class="hero-spotlight-pill">
+                        <span class="hero-spotlight-dot"></span>
+                        <span>تمرکز اصلی استودیو: سامانه مدیریت خانه بازی همبازی</span>
+                        <i class="fa-solid fa-angle-left" style="font-size: 0.75rem; opacity: 0.7;"></i>
+                    </a>
+
+                    <h1 class="hero-title">
+                        توسعه نرم‌افزارهای هوشمند، <br>
+                        برای <span class="text-gradient-primary">آرامش ذهن و رشد کسب‌وکار</span>
                     </h1>
 
-                    <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        در استودیو <strong>ماه و ستاره</strong>، ما اپلیکیشن‌هایی می‌سازیم که کار کردن با آن‌ها حس خوب و راحتی به همراه دارد. از مدیریت بی‌دردسر وام‌های دورهمی فامیلی تا سازماندهی شاداب یک خانه بازی؛ ما دغدغه‌های تکراری و پیچیدگی‌های روزمره را به چند لمس ساده تبدیل می‌کنیم.
+                    <p class="hero-desc">
+                        در استودیو <strong>ماه و ستاره</strong>، پیچیدگی‌های زمان‌بر حسابداری و فرآیندهای تکراری را به ابزارهایی سریع، ساده و لذت‌بخش تبدیل می‌کنیم. از مدیریت مدرن مراکز بازی کودک تا قرعه‌کشی شفاف وام‌های دورهمی.
                     </p>
 
-                    <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                        <a href="#products" class="soft-gradient text-white px-7 py-3.5 rounded-2xl font-bold shadow-lg shadow-indigo-500/20 hover:scale-[1.02] transition flex items-center gap-3">
-                            <i class="fa-solid fa-sparkles"></i>
-                            <span>آشنایی با محصولات ما</span>
+                    <div class="hero-actions">
+                        <a href="#hambazi" class="btn btn-amber">
+                            <i class="fa-solid fa-shapes"></i>
+                            <span>معرفی همبازی (محصول اصلی)</span>
                         </a>
-                        <a href="#values" class="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 px-6 py-3.5 rounded-2xl font-bold transition flex items-center gap-2">
-                            <i class="fa-solid fa-shield-check text-indigo-500"></i>
-                            <span>چرا ماه و ستاره؟</span>
+                        <a href="#dastbedast" class="btn btn-secondary">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            <span>اپلیکیشن دست به دست</span>
                         </a>
                     </div>
 
-                    <!-- Trust Points -->
-                    <div class="pt-8 grid grid-cols-3 gap-6 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0">
-                        <div>
-                            <span class="block text-2xl font-black text-slate-900">۱۰۰٪ شفاف</span>
-                            <span class="text-xs text-slate-500 mt-1 block">بدون ابهام در محاسبات</span>
+                    <!-- Trust Stats -->
+                    <div class="hero-stats-row">
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-val num-fa">۱۰۰٪</span>
+                            <span class="hero-stat-lbl">دقت در محاسبات مالی</span>
                         </div>
-                        <div>
-                            <span class="block text-2xl font-black text-slate-900">ساده و روان</span>
-                            <span class="text-xs text-slate-500 mt-1 block">مناسب برای تمام اعضای خانواده</span>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-val">آنی و روان</span>
+                            <span class="hero-stat-lbl">پرفورمنس بالا در تمام گوشی‌ها</span>
                         </div>
-                        <div>
-                            <span class="block text-2xl font-black text-slate-900">امن و پایدار</span>
-                            <span class="text-xs text-slate-500 mt-1 block">حفظ کامل حریم خصوصی</span>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-val">پشتیبانی دائمی</span>
+                            <span class="hero-stat-lbl">همراهی گام‌به‌گام با مشتریان</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Peaceful Showcase Visual -->
-                <div class="lg:col-span-5 flex justify-center">
-                    <div class="relative w-full max-w-md">
-                        <div class="bg-white rounded-3xl p-6 card-shadow border border-slate-100 space-y-5">
-                            <div class="flex items-center gap-4 pb-4 border-b border-slate-100">
-                                <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl">
-                                    <i class="fa-solid fa-sun"></i>
+                <!-- Visual Showcase (Dual Phone Frame) -->
+                <div class="phone-mockup-wrapper">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <img src="hambazi-splash.jpg" alt="اپلیکیشن همبازی - مدیریت خانه بازی و شهربازی" class="phone-img" loading="eager" width="290" height="627">
+                    </div>
+
+                    <!-- Secondary floating preview -->
+                    <div class="secondary-phone">
+                        <div class="phone-frame" style="max-width: 220px; box-shadow: 0 25px 40px rgba(0,0,0,0.4);">
+                            <div class="phone-notch"></div>
+                            <img src="hambazi-dash.png" alt="پیشخوان مدیریت همبازی" class="phone-img" loading="lazy" width="220" height="476">
+                        </div>
+                    </div>
+
+                    <!-- Floating live badge -->
+                    <div class="floating-stat-badge badge-top-left">
+                        <div style="width: 2.25rem; height: 2.25rem; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); display: block;">محاسبه ثانیه‌ای دقیق</span>
+                            <span style="font-size: 0.6875rem; color: var(--text-muted); display: block;">بدون نیاز به نوشتن دستی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product 1: Hambazi (Flagship - Primary Focus) -->
+        <section id="hambazi" class="section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-amber">
+                        <i class="fa-solid fa-crown" style="color: #f59e0b;"></i>
+                        <span>محصول ویژه و پرچم‌دار ماه و ستاره</span>
+                    </span>
+                    <h2 class="section-title">اپلیکیشن جامع مدیریت خانه بازی «همبازی»</h2>
+                    <p class="section-desc">
+                        پایان خطاهای دستی، دفترچه‌های نوبت و سردرگمی تسویه در مراکز بازی کودک و شهربازی‌های سرپوشیده.
+                    </p>
+                </div>
+
+                <div class="product-card-flagship">
+                    <span class="flagship-ribbon">
+                        <i class="fa-solid fa-star"></i>
+                        <span>تمرکز و اولویت اصلی استودیو</span>
+                    </span>
+
+                    <div class="product-grid">
+                        <!-- Content -->
+                        <div class="product-content">
+                            <span style="font-size: 0.8125rem; font-weight: 800; color: #d97706; text-transform: uppercase;">اتوماسیون کامل مرکز کودک</span>
+                            <h3 class="product-title">
+                                ثبت حضور، مدیریت ساده، <br>
+                                <span class="text-gradient-amber">خاطره‌های شیرین‌تر با همبازی</span>
+                            </h3>
+
+                            <p class="product-desc">
+                                «همبازی» به طور اختصاصی برای پاسخ به دغدغه‌های صندوقداران و مدیران خانه‌های بازی، مهدکودک‌ها و شهربازی‌ها طراحی شده است. سیستم با یک لمس ورود کودک را ثبت کرده، تعرفه دقیق زمانی را ثانیه به ثانیه محاسبه می‌کند و تمام هزینه‌های بوفه، رزرو جشن تولد و تجهیزات VIP را یکپارچه می‌سازد.
+                            </p>
+
+                            <!-- 4 Key Bullets -->
+                            <div class="feature-bullets-grid">
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-amber">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>محاسبه دقیق تعرفه زمانی</h4>
+                                        <p>ورود و خروج ثانیه‌ای بدون حتی یک ریال خطا یا ابهام</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-amber">
+                                        <i class="fa-solid fa-cake-candles"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>تقویم هوشمند جشن تولد</h4>
+                                        <p>رزرو منظم سانس‌ها با ثبت بیعانه و مانده بدهی</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-amber">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>اطلاع‌رسانی پیامکی به والدین</h4>
+                                        <p>پیامک آنی ورود، خروج، فاکتور و تبریک خودکار تولد</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-amber">
+                                        <i class="fa-solid fa-chart-pie"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>گزارش‌گیری سودآوری و صندوق</h4>
+                                        <p>تفکیک درآمد حضور، بوفه، بازی‌های VIP و عملکرد پرسنل</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Store Download Badges -->
+                            <div>
+                                <span style="font-size: 0.8125rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.75rem;">
+                                    دانلود و نصب مستقیم از فروشگاه‌های رسمی:
+                                </span>
+                                <div class="store-badges-group">
+                                    <!-- Cafe Bazaar -->
+                                    <a href="https://cafebazaar.ir/app/ir.moonstarstudio.hambazi" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-bazaar">
+                                        <div class="store-icon-wrap store-icon-bazaar">
+                                            <i class="fa-solid fa-store"></i>
+                                        </div>
+                                        <div class="store-badge-text">
+                                            <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                                            <span class="store-badge-title">کافه بازار</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Myket -->
+                                    <a href="https://myket.ir/app/ir.moonstarstudio.hambazi" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-myket">
+                                        <div class="store-icon-wrap store-icon-myket">
+                                            <i class="fa-solid fa-cube"></i>
+                                        </div>
+                                        <div class="store-badge-text">
+                                            <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                                            <span class="store-badge-title">مایکت</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Link to Full Hambazi Page -->
+                            <div style="padding-top: 0.5rem;">
+                                <a href="hambazi.html" class="btn btn-secondary" style="font-size: 0.875rem;">
+                                    <span>مشاهده توضیحات کامل و اسکرین‌شات‌های همبازی</span>
+                                    <i class="fa-solid fa-arrow-left" style="font-size: 0.75rem;"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Visual Frame -->
+                        <div class="phone-mockup-wrapper">
+                            <div class="phone-frame">
+                                <div class="phone-notch"></div>
+                                <img src="hambazi-dash.png" alt="داشبورد و پیشخوان اپلیکیشن همبازی" class="phone-img" loading="lazy" width="290" height="627">
+                            </div>
+
+                            <div class="floating-stat-badge badge-bottom-right">
+                                <div style="width: 2.25rem; height: 2.25rem; border-radius: 8px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+                                    <i class="fa-solid fa-bell"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-slate-800 text-base">یک روز کاری منظم‌تر</h3>
-                                    <p class="text-xs text-slate-500">نرم‌افزارهایی که کارها را خودکار و بی‌نقص پیش می‌برند</p>
+                                    <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); display: block;">پیامک خودکار والدین</span>
+                                    <span style="font-size: 0.6875rem; color: var(--text-muted); display: block;">اطلاع‌رسانی لحظه‌ای خروج و تسویه</span>
                                 </div>
-                            </div>
-
-                            <!-- Mini Product Card 1 -->
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">
-                                        <i class="fa-solid fa-arrows-rotate"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-slate-800 text-sm">دست به دست</h4>
-                                        <p class="text-[11px] text-slate-500">خداحافظی با کاغذبازی وام خانگی</p>
-                                    </div>
-                                </div>
-                                <a href="dastbedast.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800">
-                                    مشاهده <i class="fa-solid fa-angle-left text-[10px]"></i>
-                                </a>
-                            </div>
-
-                            <!-- Mini Product Card 2 -->
-                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm font-bold">
-                                        <i class="fa-solid fa-shapes"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-slate-800 text-sm">همبازی</h4>
-                                        <p class="text-[11px] text-slate-500">حضور و غیاب آسان و رزرو جشن تولد</p>
-                                    </div>
-                                </div>
-                                <a href="hambazi.html" class="text-xs font-bold text-amber-600 hover:text-amber-800">
-                                    مشاهده <i class="fa-solid fa-angle-left text-[10px]"></i>
-                                </a>
-                            </div>
-
-                            <div class="pt-2 flex items-center justify-between text-xs text-slate-500">
-                                <span class="flex items-center gap-1"><i class="fa-solid fa-check text-emerald-500"></i> پشتیبانی همیشگی و به‌روزرسانی مداوم</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Studio Values & Philosophy -->
-    <section id="values" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-indigo-600 font-bold text-xs uppercase tracking-wider block mb-2">تعهد ما به شما</span>
-                <h2 class="text-3xl font-black text-slate-900 mb-4">چرا کاربران به ماه و ستاره اعتماد می‌کنند؟</h2>
-                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                    ما برنامه‌ها را نه برای سردرگمی، بلکه برای ایجاد راحتی و حس اطمینان واقعی می‌سازیم.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                
-                <div class="bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:-translate-y-1 transition duration-300">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-face-smile"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">رابط کاربری چشم‌نواز و آسان</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        نیاز به هیچ کلاس آموزشی یا راهنمای قطور نیست! از اولین لحظه باز کردن برنامه، همه چیز روشن، فارسی، بزرگ و کاملاً دم دست است.
+        <!-- Product 2: Dast be Dast -->
+        <section id="dastbedast" class="section" style="background: var(--bg-surface-subtle);">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <span>مدیریت مالی دورهمی و خانواده</span>
+                    </span>
+                    <h2 class="section-title">اپلیکیشن قرعه‌کشی وام خانگی «دست به دست»</h2>
+                    <p class="section-desc">
+                        سامانه هوشمند، شفاف و عادلانه برای سامان‌دهی صندوق‌های قرض‌الحسنه فامیلی و همکاران.
                     </p>
                 </div>
 
-                <div class="bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:-translate-y-1 transition duration-300">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">امانت‌داری و حریم خصوصی</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        اطلاعات شما، مبالغ قرعه‌کشی و اطلاعات خانوادگی کاملاً محرمانه نگهداری می‌شوند و حریم خصوصی اولویت اول استودیو ماست.
-                    </p>
-                </div>
-
-                <div class="bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:-translate-y-1 transition duration-300">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-mobile"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">سریع روی تمام گوشی‌ها</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        برنامه‌ها روان کار می‌کنند، باتری گوشی شما را تمام نمی‌کنند و اطلاعات شما با اینترنت قطع و وصل هم از دست نمی‌رود.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Flagship Products Showcase -->
-    <section id="products" class="py-24 bg-slate-50 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-20">
-                <span class="text-indigo-600 font-bold text-xs uppercase tracking-wider block mb-2">محصولات آماده استفاده</span>
-                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-4">برنامه‌های ساخته شده در استودیو ماه و ستاره</h2>
-                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    دو راهکار دقیق و کاربردی که هم‌اکنون برای استفاده شما و کسب‌وکارتان در دسترس هستند:
-                </p>
-            </div>
-
-            <div class="space-y-16">
-                
-                <!-- Product 1: Dast Be Dast -->
-                <div class="bg-white rounded-3xl p-8 lg:p-12 card-shadow border border-slate-200/70">
-                    <div class="grid lg:grid-cols-12 gap-10 items-center">
-                        <div class="lg:col-span-7 space-y-6">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-bold">
-                                <i class="fa-solid fa-coins"></i>
-                                <span>اپلیکیشن اول: مدیریت مالی دورهمی</span>
+                <div class="product-card-standard">
+                    <div class="product-grid">
+                        <!-- Visual Frame -->
+                        <div class="phone-mockup-wrapper" style="order: 2;">
+                            <div class="phone-frame">
+                                <div class="phone-notch"></div>
+                                <img src="dast-1.jpg" alt="گردونه قرعه کشی دست به دست" class="phone-img" loading="lazy" width="290" height="627">
                             </div>
 
-                            <h3 class="text-3xl sm:text-4xl font-black text-slate-900">
-                                اپلیکیشن «دست به دست»
-                                <span class="block text-base sm:text-lg font-normal text-slate-500 mt-2">سامانه هوشمند و عادلانه مدیریت وام‌های خانگی و فامیلی</span>
+                            <div class="floating-stat-badge badge-top-left">
+                                <div style="width: 2.25rem; height: 2.25rem; border-radius: 8px; background: rgba(79, 70, 229, 0.15); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+                                    <i class="fa-solid fa-dharmachakra"></i>
+                                </div>
+                                <div>
+                                    <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); display: block;">گردونه شانس آنلاین</span>
+                                    <span style="font-size: 0.6875rem; color: var(--text-muted); display: block;">قرعه‌کشی زنده و عادلانه</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="product-content" style="order: 1;">
+                            <span style="font-size: 0.8125rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">شفافیت، عدالت و نظم</span>
+                            <h3 class="product-title">
+                                خداحافظی با کاغذبازی و <br>
+                                <span class="text-gradient-primary">سوءتفاهم‌های وام خانگی</span>
                             </h3>
 
-                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                                اگر در خانواده، فامیل یا محل کار صندوق قرض‌الحسنه و وام خانگی دارید، «دست به دست» تمام استرس‌ها و سوءتفاهم‌ها را تمام می‌کند. گردونه قرعه‌کشی شفاف آنلاین، یادآوری خودکار زمان پرداخت اقساط و ثبت دقیق اسامی برندگان، همه در جیب شماست.
+                            <p class="product-desc">
+                                اگر در فامیل، محله یا محیط کار صندوق پس‌انداز و وام دورهمی دارید، «دست به دست» تمام سردرگمی‌ها را برطرف می‌کند. گردونه هیجان‌انگیز قرعه‌کشی، ثبت خودکار برندگان، یادآوری تاریخ واریز اقساط و امکان فعال‌سازی حالت محرمانه، خیالتان را از نظم مالی آسوده می‌کند.
                             </p>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <i class="fa-solid fa-dharmachakra text-indigo-600 text-xl mb-2 block"></i>
-                                    <span class="text-sm font-bold text-slate-900 block">گردونه آنلاین شانس</span>
-                                    <span class="text-xs text-slate-500">قرعه‌کشی عادلانه جلوی چشم همه</span>
+                            <!-- 3 Bullets -->
+                            <div class="feature-bullets-grid">
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-indigo">
+                                        <i class="fa-solid fa-dharmachakra"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>گردونه شفاف قرعه‌کشی</h4>
+                                        <p>چرخش تصادفی آنلاین پیش چشم همه اعضا</p>
+                                    </div>
                                 </div>
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <i class="fa-solid fa-calculator text-emerald-600 text-xl mb-2 block"></i>
-                                    <span class="text-sm font-bold text-slate-900 block">محاسبه خودکار</span>
-                                    <span class="text-xs text-slate-500">بدون نیاز به نوشتن و سردرگمی</span>
+
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-emerald">
+                                        <i class="fa-solid fa-calculator"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>محاسبه خودکار اقساط</h4>
+                                        <p>نمایش مانده بدهی و نوبت برندگان بدون اشتباه</p>
+                                    </div>
                                 </div>
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <i class="fa-solid fa-shield-halved text-amber-600 text-xl mb-2 block"></i>
-                                    <span class="text-sm font-bold text-slate-900 block">حالت محرمانه</span>
-                                    <span class="text-xs text-slate-500">امکان حفظ حریم خصوصی برندگان</span>
+
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-indigo">
+                                        <i class="fa-solid fa-user-shield"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>حالت محرمانه و حفظ احترام</h4>
+                                        <p>امکان پنهان‌سازی اسامی برندگان بر اساس توافق گروه</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-bullet-item">
+                                    <div class="feature-bullet-icon bullet-icon-emerald">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div class="bullet-text">
+                                        <h4>پنل مجزای مدیر و اعضا</h4>
+                                        <p>امکان مدیریت چند صندوق همزمان در یک اپلیکیشن</p>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="pt-4 flex flex-wrap items-center gap-4">
-                                <a href="dastbedast.html" class="soft-gradient text-white px-6 py-3 rounded-xl font-bold text-sm shadow-md shadow-indigo-500/20 hover:opacity-95 transition flex items-center gap-2">
-                                    <span>مشاهده توضیحات کامل «دست به دست»</span>
-                                    <i class="fa-solid fa-arrow-left text-xs"></i>
-                                </a>
-                                <a href="dastbedast.apk" download class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-5 py-3 rounded-xl font-bold text-sm transition flex items-center gap-2">
-                                    <i class="fa-brands fa-android text-emerald-600 text-base"></i>
-                                    <span>دانلود مستقیم برنامه</span>
-                                </a>
-                            </div>
-                        </div>
+                            <!-- Store Download Badges -->
+                            <div>
+                                <span style="font-size: 0.8125rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.75rem;">
+                                    دانلود و نصب مستقیم از فروشگاه‌های رسمی:
+                                </span>
+                                <div class="store-badges-group">
+                                    <!-- Cafe Bazaar -->
+                                    <a href="https://cafebazaar.ir/app/ir.techninja.dastbedast" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-bazaar">
+                                        <div class="store-icon-wrap store-icon-bazaar">
+                                            <i class="fa-solid fa-store"></i>
+                                        </div>
+                                        <div class="store-badge-text">
+                                            <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                                            <span class="store-badge-title">کافه بازار</span>
+                                        </div>
+                                    </a>
 
-                        <div class="lg:col-span-5 flex justify-center">
-                            <div class="relative w-[230px] sm:w-[260px]">
-                                <div class="phone-frame">
-                                    <div class="phone-notch"></div>
-                                    <img src="dast-1.jpg" alt="گردونه قرعه کشی دست به دست" class="w-full h-auto block">
+                                    <!-- Myket -->
+                                    <a href="https://myket.ir/app/ir.techninja.dastbedast" target="_blank" rel="noopener noreferrer" class="store-badge store-badge-myket">
+                                        <div class="store-icon-wrap store-icon-myket">
+                                            <i class="fa-solid fa-cube"></i>
+                                        </div>
+                                        <div class="store-badge-text">
+                                            <span class="store-badge-subtitle">دریافت نسخه رسمی از</span>
+                                            <span class="store-badge-title">مایکت</span>
+                                        </div>
+                                    </a>
                                 </div>
+                            </div>
+
+                            <!-- Link to Full Dast be Dast Page -->
+                            <div style="padding-top: 0.5rem;">
+                                <a href="dastbedast.html" class="btn btn-secondary" style="font-size: 0.875rem;">
+                                    <span>مشاهده توضیحات کامل و تصاویر «دست به دست»</span>
+                                    <i class="fa-solid fa-arrow-left" style="font-size: 0.75rem;"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Product 2: Hambazi -->
-                <div class="bg-white rounded-3xl p-8 lg:p-12 card-shadow border border-slate-200/70">
-                    <div class="grid lg:grid-cols-12 gap-10 items-center">
-                        
-                        <div class="lg:col-span-5 order-2 lg:order-1 flex justify-center">
-                            <div class="relative w-[230px] sm:w-[260px]">
-                                <div class="phone-frame">
-                                    <div class="phone-notch"></div>
-                                    <img src="hambazi-splash.jpg" alt="اپلیکیشن مدیریت خانه بازی همبازی" class="w-full h-auto block">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 text-amber-700 text-xs font-bold">
-                                <i class="fa-solid fa-shapes"></i>
-                                <span>اپلیکیشن دوم: مدیریت مراکز کودک و خانه بازی</span>
-                            </div>
-
-                            <h3 class="text-3xl sm:text-4xl font-black text-slate-900">
-                                اپلیکیشن «همبازی»
-                                <span class="block text-base sm:text-lg font-normal text-slate-500 mt-2">ثبت حضور، مدیریت ساده، خاطره‌های شیرین‌تر</span>
-                            </h3>
-
-                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                                اتوماسیون کامل برای مدیران خانه‌های بازی، مهدکودک‌ها و شهربازی‌ها. ثبت ورود و خروج ثانیه‌ای کودکان، محاسبه خودکار هزینه حضور، رزرو تقویمی سانس جشن تولد، مدیریت بوفه و وسایل VIP، همراه با ارسال پیامک‌های خودکار و محبت‌آمیز به والدین.
-                            </p>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <i class="fa-solid fa-clock-rotate-left text-blue-600 text-xl mb-2 block"></i>
-                                    <span class="text-sm font-bold text-slate-900 block">محاسبه دقیق زمان</span>
-                                    <span class="text-xs text-slate-500">ثبت ورود سریع و تسویه بدون معطلی</span>
-                                </div>
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <i class="fa-solid fa-cake-candles text-amber-600 text-xl mb-2 block"></i>
-                                    <span class="text-sm font-bold text-slate-900 block">رزرو جشن تولد</span>
-                                    <span class="text-xs text-slate-500">تقویم روزانه با ثبت بیعانه</span>
-                                </div>
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <i class="fa-solid fa-message-sms text-purple-600 text-xl mb-2 block"></i>
-                                    <span class="text-sm font-bold text-slate-900 block">پیامک خودکار والدین</span>
-                                    <span class="text-xs text-slate-500">اطلاع ورود، خروج و تبریک تولد</span>
-                                </div>
-                            </div>
-
-                            <div class="pt-4 flex flex-wrap items-center gap-4">
-                                <a href="hambazi.html" class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-md shadow-amber-500/20 hover:opacity-95 transition flex items-center gap-2">
-                                    <span>مشاهده توضیحات و اسکرین‌شات‌های «همبازی»</span>
-                                    <i class="fa-solid fa-arrow-left text-xs"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
+        <!-- Studio Values & Philosophy -->
+        <section id="values" class="section">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">تعهدات و استانداردهای توسعه ما</span>
+                    <h2 class="section-title">چرا کاربران به نرم‌افزارهای ما اعتماد می‌کنند؟</h2>
+                    <p class="section-desc">ما محصولاتمان را طوری می‌سازیم که نیاز به دفترچه راهنما نداشته باشید و در همان لمس اول، حس اطمینان و راحتی پیدا کنید.</p>
                 </div>
 
+                <div class="cards-grid-3">
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(79, 70, 229, 0.12); color: var(--primary);">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="feature-card-title">رابط کاربری ساده و دلنشین</h3>
+                        <p class="feature-card-text">
+                            طراحی شده بدون منوهای تودرتو و گیج‌کننده. چه کاربر مبتدی باشید چه کارشناس حرفه‌ای، در کمتر از چند دقیقه به تمام ابزارها تسلط پیدا می‌کنید.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <h3 class="feature-card-title">فوق‌العاده سریع و بهینه</h3>
+                        <p class="feature-card-text">
+                            کدنویسی استاندارد و ساختار سبک باعث می‌شود برنامه‌ها حتی روی گوشی‌های قدیمی با حداقل مصرف اینترنت و باتری بدون هنگ و کندی اجرا شوند.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-card-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="feature-card-title">امانت‌داری و حریم خصوصی</h3>
+                        <p class="feature-card-text">
+                            اطلاعات مالی، مشخصات مشتریان و شماره تماس والدین نزد ما امانت است و طبق استانداردهای امنیتی مدرن رمزنگاری و نگهداری می‌شوند.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact & Warm Note -->
-    <section id="contact" class="py-20 bg-white border-t border-slate-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-            <div class="w-16 h-16 rounded-3xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl mx-auto">
-                <i class="fa-solid fa-hand-holding-heart"></i>
+        <!-- Contact Section -->
+        <section id="contact" class="section" style="background: var(--bg-surface-subtle); border-top: 1px solid var(--border-subtle);">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-badge section-badge-indigo">همراه شما هستیم</span>
+                    <h2 class="section-title">راه‌های ارتباط و مشاوره رایگان</h2>
+                    <p class="section-desc">
+                        برای پرسش درباره نحوه کار با اپلیکیشن‌ها، درخواست راهنمایی یا دریافت دمو، مستقیماً با ما در تماس باشید.
+                    </p>
+                </div>
+
+                <div class="contact-cards-grid">
+                    <!-- Phone -->
+                    <a href="tel:09158657190" class="contact-card">
+                        <div class="contact-card-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <h3 class="contact-card-title">تماس تلفنی مستقیم</h3>
+                        <p class="contact-card-desc">پاسخگویی به سوالات و راهنمایی سریع نصب</p>
+                        <span class="contact-card-link num-fa">۰۹۱۵۸۶۵۷۱۹۰</span>
+                    </a>
+
+                    <!-- Telegram -->
+                    <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-card-icon" style="background: rgba(2, 132, 199, 0.12); color: #0284c7;">
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+                        <h3 class="contact-card-title">پشتیبانی در تلگرام</h3>
+                        <p class="contact-card-desc">ارسال پیام آنی و دریافت تصاویر محیط برنامه</p>
+                        <span class="contact-card-link">t.me/tech_ninja</span>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:hasan.hoseini.dev@gmail.com" class="contact-card">
+                        <div class="contact-card-icon" style="background: rgba(99, 102, 241, 0.12); color: var(--primary);">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <h3 class="contact-card-title">مکاتبه با ایمیل</h3>
+                        <p class="contact-card-desc">پیشنهاد همکاری و مکاتبات اداری</p>
+                        <span class="contact-card-link" style="font-size: 0.8125rem;">hasan.hoseini.dev@gmail.com</span>
+                    </a>
+                </div>
             </div>
+        </section>
 
-            <h2 class="text-3xl font-black text-slate-900">
-                همراه شما در مسیر ساده‌تر شدن کارها
-            </h2>
-
-            <p class="text-slate-600 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-                اگر سوالی درباره استفاده از برنامه‌ها دارید، یا برای مجموعه خود نیاز به راهکاری اختصاصی دارید، مشتاقانه پاسخگوی شما هستیم.
-            </p>
-
-            <div class="flex flex-wrap justify-center items-center gap-4 pt-4">
-                <a href="mailto:info@moonstarstudio.ir" class="soft-gradient text-white px-7 py-3.5 rounded-2xl font-bold shadow-md shadow-indigo-500/20 hover:scale-[1.02] transition flex items-center gap-3">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>info@moonstarstudio.ir</span>
-                </a>
-                <a href="https://t.me" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-3.5 rounded-2xl font-bold transition flex items-center gap-2">
-                    <i class="fa-brands fa-telegram text-blue-500 text-lg"></i>
-                    <span>گفتگو در تلگرام</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-50 border-t border-slate-200/70 py-10 text-slate-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3 text-slate-700">
-                <span class="font-bold">استودیو نرم‌افزاری ماه و ستاره</span>
-                <span class="text-slate-300">•</span>
-                <span class="font-medium text-slate-500">moonstarstudio.ir</span>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="brand-link">
+                        <div class="brand-logo-icon" style="width: 2.25rem; height: 2.25rem; font-size: 1rem;">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+                        <div>
+                            <span class="brand-title">استودیو نرم‌افزاری ماه و ستاره</span>
+                            <span class="brand-subtitle">خلق محصولات هوشمند برای کسب‌وکار و زندگی</span>
+                        </div>
+                    </div>
+                    <p>
+                        طراحی و توسعه اپلیکیشن‌های تخصصی با تمرکز بر پرفورمنس بالا، رابط کاربری روان و حس آرامش برای کاربران فارسی‌زبان.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">محصولات استودیو</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="hambazi.html" class="footer-link">اپلیکیشن همبازی (مدیریت خانه بازی)</a>
+                        </li>
+                        <li>
+                            <a href="dastbedast.html" class="footer-link">اپلیکیشن دست به دست (وام خانگی)</a>
+                        </li>
+                        <li>
+                            <a href="https://cafebazaar.ir/app/ir.moonstarstudio.hambazi" target="_blank" rel="noopener noreferrer" class="footer-link">همبازی در کافه بازار</a>
+                        </li>
+                        <li>
+                            <a href="https://myket.ir/app/ir.moonstarstudio.hambazi" target="_blank" rel="noopener noreferrer" class="footer-link">همبازی در مایکت</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">ارتباط با ما</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="tel:09158657190" class="footer-link num-fa">تلفن: ۰۹۱۵۸۶۵۷۱۹۰</a>
+                        </li>
+                        <li>
+                            <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="footer-link">تلگرام: tech_ninja@</a>
+                        </li>
+                        <li>
+                            <a href="mailto:hasan.hoseini.dev@gmail.com" class="footer-link">ایمیل: hasan.hoseini.dev@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <div>
-                تمامی حقوق محفوظ است © ۱۴۰۵
-            </div>
-
-            <div class="flex items-center gap-5 text-slate-400 text-base">
-                <a href="#" class="hover:text-indigo-600 transition"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#" class="hover:text-indigo-600 transition"><i class="fa-brands fa-instagram"></i></a>
-                <a href="mailto:info@moonstarstudio.ir" class="hover:text-indigo-600 transition"><i class="fa-solid fa-envelope"></i></a>
+            <div class="footer-bottom">
+                <div>
+                    تمامی حقوق مادی و معنوی برای استودیو نرم‌افزاری ماه و ستاره محفوظ است © ۱۴۰۵
+                </div>
+                <div class="social-links">
+                    <a href="https://t.me/tech_ninja" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="تلگرام">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                    <a href="mailto:hasan.hoseini.dev@gmail.com" class="social-btn" aria-label="ایمیل">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="tel:09158657190" class="social-btn" aria-label="تماس تلفنی">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Interactive Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Reveal desktop header phone button on scroll or on larger screens
+        if (window.innerWidth >= 1200) {
+            const btn = document.getElementById('headerPhoneBtn');
+            if (btn) btn.style.display = 'inline-flex';
+        }
+    </script>
 </body>
 </html>
